@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+    - Base      : kobuki
+    - Stacks    : hexagons
+    - 3d Sensor : raypc3d
+-->    
+<robot name="turtlebot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find turtlebot_description)/urdf/turtlebot_common_library.urdf.xacro" />
+  <xacro:include filename="$(find kobuki_description)/urdf/kobuki_batbot.urdf.xacro" />
+  <xacro:include filename="$(find turtlebot_description)/urdf/stacks/circles.urdf.xacro"/>
+  <xacro:include filename="$(find turtlebot_description)/urdf/sensors/raypc3d.urdf.xacro"/>
+  
+  <kobuki/>
+  <turtlebot_hardware parent="base_link"/>
+  <raypc3d_sensor  parent="base_link"/>
+</robot>

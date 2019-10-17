@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<robot name = "raypc3d_gazebo">
+
+
+  <!-- hokuyo -->
+  <gazebo reference="hokuyo">
+    <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>100</update_rate>
+      <ray>
+        <scan>
+         <!-- <horizontal>
+             <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal> -->
+           <horizontal>
+          <samples>100</samples>
+          <resolution>1</resolution>
+          <min_angle>-1.523</min_angle>
+          <max_angle>1.523</max_angle>
+        </horizontal>
+        <vertical>
+          <samples>100</samples>
+          <resolution>1</resolution>
+          <min_angle>0</min_angle>
+          <max_angle>0.523</max_angle>
+        </vertical>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>1</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading.   libgazebo_ros_gpu_laser.so -->
+          <mean>0.0</mean>
+          <stddev>0.0000</stddev>
+        </noise>
+      </ray>
+
+      
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_3d_laser_plugin.so">
+      <alwaysOn>true</alwaysOn>
+      <hokuyoMinIntensity> 100 </hokuyoMinIntensity>
+      <use_pointcloud2> true </use_pointcloud2>
+      <topicName>/mybot/laser</topicName>
+      <frameName>hokuyo</frameName>
+      <gaussianNoise>0.01</gaussianNoise>
+      <updateRate>30</updateRate>
+      </plugin>
+    
+    <always_on>true</always_on>
+                
+    </sensor>
+  </gazebo>
+
+</robot>
+

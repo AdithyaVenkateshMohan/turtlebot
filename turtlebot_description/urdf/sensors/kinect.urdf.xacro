@@ -11,6 +11,7 @@
       <parent link="${parent}"/>
       <child link="camera_rgb_frame" />
     </joint>
+    
     <link name="camera_rgb_frame"/>
 
     <joint name="camera_rgb_optical_joint" type="fixed">
